@@ -1,0 +1,24 @@
+version: "3.9"  # Specify a docker-compose version
+
+services:
+  server:
+    container_name: server  # Give the container a name
+    build:
+      dockerfile: dockerfile # Dockerfile name (if needed)
+    volumes:
+      - ./python:/app  # Mount a volume for your Python code
+    working_dir: /app  # Set the working directory inside the container
+    command: ["python", "server.py"]  # Command to run (replace with your script)
+    ports:
+      - "5000:5000" # Expose a port (if needed)
+
+  client:
+    container_name: client
+    build:
+      dockerfile: dockerfile # Dockerfile name (if needed)
+    volumes:
+      - ./python:/app  # Mount a different volume
+    working_dir: /app
+    command: ["tail", "-f", "/dev/null"] # Different command
+    ports:
+      - "5001:5000" # Map to a different host port

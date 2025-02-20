@@ -1,0 +1,12 @@
+FROM python:latest
+
+WORKDIR /app
+
+# Copy requirements.txt (if you have one)
+COPY requirements.txt .
+# Install dependencies, including grpcio
+RUN pip install -r requirements.txt grpcio
+# Copy your application code
+COPY ./python .
+# Set the entrypoint (if needed). If you're using the `command` in docker-compose, this is optional.
+# ENTRYPOINT ["python", "your_script.py"]  # Or whatever your main script is
